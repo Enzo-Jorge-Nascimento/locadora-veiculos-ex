@@ -29,7 +29,7 @@ public class CarroController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CarroResponse> carroDetalhado(Integer id) {
+    public ResponseEntity<CarroResponse> carroDetalhado(@PathVariable Integer id) {
         if (id == null) return ResponseEntity.status(400).build();
 
         CarroResponse response = service.carroDetalhado(id).get();
@@ -53,6 +53,15 @@ public class CarroController {
         List<CarroResponse> response = service.listarPorAcessorio(acessorio);
 
         return (response.isEmpty()) ? ResponseEntity.status(204).build() : ResponseEntity.status(200).body(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarPorId(@PathVariable Integer id) {
+        if (id == null) return ResponseEntity.status(400).build();
+
+        service.deletarPorId(id);
+
+        return ResponseEntity.status(204).build();
     }
 
 }

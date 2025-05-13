@@ -36,4 +36,8 @@ public class CarroService {
         return repository.findAllByAcessorio(acessorio).stream().map(CarroMapping::toResponse).toList();
     }
 
+    public void deletarPorId(Integer id) {
+        repository.deleteById(id);
+    }
+
 }
